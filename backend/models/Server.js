@@ -1,5 +1,9 @@
 import { MongoClient } from "mongodb";
 import express from "express";
+import clienteRoutes from "../routes/clientes.routes.js";
+import alquilerRoutes from "../routes/alquiler.routes.js";
+import reservaRoutes from "../routes/reservas.routes.js";
+
 
 class Server {
     constructor(){
@@ -9,7 +13,9 @@ class Server {
         this.middlewares();
 
         this.rutas = {
-
+            clientes:'/api/clientes',
+            alquiler:'/api/alquiler',
+            reserva:'/api/reserva',
         }
 
         this.routes();
@@ -26,7 +32,9 @@ class Server {
     }
 
     routes(){
-
+        this.app.use(this.rutas.clientes,clienteRoutes);
+        this.app.use(this.rutas.alquiler,alquilerRoutes);
+        this.app.use(this.rutas.reserva,reservaRoutes);
     }
 }
 

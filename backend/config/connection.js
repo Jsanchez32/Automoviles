@@ -4,7 +4,7 @@ import { MongoClient } from "mongodb";
 dotenv.config();
 
 const client = new MongoClient(process.env.DATABASE)
-const dbName = ""
+const dbName = "alquilerAutomoviles"
 
 const conectionDB = async ()=>{
     await client.connect();
