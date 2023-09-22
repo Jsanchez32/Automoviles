@@ -5,6 +5,7 @@ import alquilerRoutes from "../routes/alquiler.routes.js";
 import reservaRoutes from "../routes/reservas.routes.js";
 import empleadoRoutes from "../routes/empleado.routes.js";
 import sucursalRoutes from "../routes/sucursal.routes.js";
+import automovilRoutes from "../routes/automovil.routes.js";
 
 class Server {
     constructor(){
@@ -14,11 +15,12 @@ class Server {
         this.middlewares();
 
         this.rutas = {
-            clientes:'/api/clientes',
+            clientes:'/api/cliente',
             alquiler:'/api/alquiler',
             reserva:'/api/reserva',
             empleado:'/api/empleado',
-            sucursal:'/api/sucursal'
+            sucursal:'/api/sucursal',
+            automovil:'/api/automovil'
         }
 
         this.routes();
@@ -40,6 +42,7 @@ class Server {
         this.app.use(this.rutas.reserva,reservaRoutes);
         this.app.use(this.rutas.empleado,empleadoRoutes);
         this.app.use(this.rutas.sucursal,sucursalRoutes);
+        this.app.use(this.rutas.automovil,automovilRoutes);
     }
 }
 

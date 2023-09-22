@@ -11,6 +11,18 @@ const endpoint7 = async (req,res)=>{
     }
 }
 
+const endpoint14 = async (req,res)=>{
+    try {
+        const db = await conection();;
+        const coleccion = db.collection('empleado');
+        const response = await coleccion.find({$or:[{cargo:'Gerente'},{cargo:'Asistente'}]}).toArray();
+        res.send(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export {
-    endpoint7
+    endpoint7,
+    endpoint14
 }

@@ -2,7 +2,7 @@ import conection from "../config/connection.js"
 
 const endpoint4 = async (req,res)=>{
     try {
-        const db = await conection();;
+        const db = await conection();
         const coleccion = db.collection('alquiler');
         const response = await coleccion.aggregate([
             {$match: {estado:'Pendiente'}},
@@ -25,6 +25,25 @@ const endpoint4 = async (req,res)=>{
     }
 }
 
+const endpoint15 = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('alquiler');
+        const response = await coleccion.aggregate([
+            {$project:{"_id":0,"id_alquiler":1,"id_cliente":1}},
+            {$lookup:{
+                from:"cliente",
+                localField:"id_cliente",
+                foreignField:'id_Cliente',
+                as:"Cliente"
+            }}
+        ]).toArray();
+        res.send(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
 export {
-    endpoint4
+    endpoint4,
+    endpoint15
 }
