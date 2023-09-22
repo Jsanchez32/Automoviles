@@ -74,11 +74,23 @@ const endpoint12 = async (req,res)=>{
     }
 }
 
+const endpoint18 = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('alquiler');
+        const response = await coleccion.find().toArray();
+        res.send(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 export {
     endpoint2,
     endpoint3,
     endpoint6,
     endpoint9,
-    endpoint12
+    endpoint12,
+    endpoint18
 }
