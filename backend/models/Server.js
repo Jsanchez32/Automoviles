@@ -6,6 +6,7 @@ import reservaRoutes from "../routes/reservas.routes.js";
 import empleadoRoutes from "../routes/empleado.routes.js";
 import sucursalRoutes from "../routes/sucursal.routes.js";
 import automovilRoutes from "../routes/automovil.routes.js";
+import loginRoutes from "../routes/login.routes.js";
 
 class Server {
     constructor(){
@@ -20,7 +21,8 @@ class Server {
             reserva:'/api/reserva',
             empleado:'/api/empleado',
             sucursal:'/api/sucursal',
-            automovil:'/api/automovil'
+            automovil:'/api/automovil',
+            login: '/api/login'
         }
 
         this.routes();
@@ -43,6 +45,7 @@ class Server {
         this.app.use(this.rutas.empleado,empleadoRoutes);
         this.app.use(this.rutas.sucursal,sucursalRoutes);
         this.app.use(this.rutas.automovil,automovilRoutes);
+        this.app.use(this.rutas.login,loginRoutes);
     }
 }
 
