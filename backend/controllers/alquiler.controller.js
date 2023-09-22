@@ -1,6 +1,6 @@
 import conection from "../config/connection.js"
 
-const endpoint2 = async (req,res)=>{
+const endpoint3 = async (req,res)=>{
     try {
         const db = await conection();;
         const coleccion = db.collection('alquiler');
@@ -19,7 +19,7 @@ const endpoint2 = async (req,res)=>{
     }
 }
 
-const endpoint3 = async (req,res)=>{
+const endpoint4 = async (req,res)=>{
     try {
         const db = await conection();;
         const coleccion = db.collection('alquiler');
@@ -87,8 +87,8 @@ const endpoint18 = async (req,res)=>{
 
 
 export {
-    endpoint2,
     endpoint3,
+    endpoint4,
     endpoint6,
     endpoint9,
     endpoint12,

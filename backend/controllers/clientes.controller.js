@@ -1,6 +1,6 @@
 import conection from "../config/connection.js"
 
-const endpoint1 = async (req,res)=>{
+const endpoint2 = async (req,res)=>{
     try {
         const db = await conection();;
         const coleccion = db.collection('cliente');
@@ -27,7 +27,7 @@ const endpoint13 = async (req,res)=>{
         const db = await conection();
         const coleccion = db.collection('cliente');
         const response = await coleccion.aggregate([
-            {$match:{id_Cliente:2}},
+            {$match:{id_Cliente:1}},
             {$lookup:{
                 from:"reserva",
                 localField:"id_Cliente",
@@ -44,7 +44,7 @@ const endpoint13 = async (req,res)=>{
 
 
 export {
-    endpoint1,
+    endpoint2,
     endpoint10,
     endpoint13
 }
