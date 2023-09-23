@@ -42,9 +42,62 @@ const endpoint13 = async (req,res)=>{
     }
 }
 
+const addCliente = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('cliente');
+        const data = req.body;
+        const response = await coleccion.insertOne(data);
+        res.json({
+            response,
+            data});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const updateCliente = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('cliente');
+        const data = req.body;
+        const id = parseInt(req.params.id);
+        await coleccion.findOneAndUpdate({ id_Cliente: id }, { $set: data });
+        res.send(data)
+        } catch (error) {
+        console.log(error);
+    }
+}
+
+const deleteCliente = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('cliente');
+        const id = parseInt(req.params.id);
+        const response = await coleccion.deleteOne({id_Cliente: id})
+        res.send(response)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getCliente = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('cliente');
+        const info = await coleccion.find().toArray();
+        res.send(info);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export {
     endpoint2,
     endpoint10,
-    endpoint13
+    endpoint13,
+    addCliente,
+    deleteCliente,
+    updateCliente,
+    getCliente
 }

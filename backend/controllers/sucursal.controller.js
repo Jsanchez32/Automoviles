@@ -45,7 +45,62 @@ const endpoint17 = async (req,res)=>{
     }
 }
 
+const addSucursalAutomovil = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('sucursalAutomovil');
+        const data = req.body;
+        const response = await coleccion.insertOne(data);
+        res.json({
+            response,
+            data});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const updateSucursalAutomovil = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('sucursalAutomovil');
+        const data = req.body;
+        const id = parseInt(req.params.id);
+        await coleccion.findOneAndUpdate({ id_SucursalAutomovil: id }, { $set: data });
+        res.send(data)
+        } catch (error) {
+        console.log(error);
+    }
+}
+
+const deleteSucursalAutomovil = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('sucursalAutomovil');
+        const id = parseInt(req.params.id);
+        const response = await coleccion.deleteOne({id_SucursalAutomovil: id})
+        res.send(response)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getSucursalAutomovil = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('sucursalAutomovil');
+        const info = await coleccion.find().toArray();
+        res.send(info);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 export {
     endpoint8,
-    endpoint17
+    endpoint17,
+    addSucursalAutomovil,
+    deleteSucursalAutomovil,
+    updateSucursalAutomovil,
+    getSucursalAutomovil
 }

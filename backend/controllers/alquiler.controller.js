@@ -85,6 +85,56 @@ const endpoint18 = async (req,res)=>{
     }
 }
 
+const addAlquiler = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('alquiler');
+        const data = req.body;
+        const response = await coleccion.insertOne(data);
+        res.json({
+            response,
+            data});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const updateAlquiler = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('alquiler');
+        const data = req.body;
+        const id = parseInt(req.params.id);
+        await coleccion.findOneAndUpdate({ id_alquiler: id }, { $set: data });
+        res.send(data)
+        } catch (error) {
+        console.log(error);
+    }
+}
+
+const deleteAlquiler = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('alquiler');
+        const id = parseInt(req.params.id);
+        const response = await coleccion.deleteOne({id_alquiler: id})
+        res.send(response)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getAlquiler = async (req,res)=>{
+    try {
+        const db = await conection();
+        const coleccion = db.collection('alquiler');
+        const info = await coleccion.find().toArray();
+        res.send(info);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 export {
     endpoint3,
@@ -92,5 +142,9 @@ export {
     endpoint6,
     endpoint9,
     endpoint12,
-    endpoint18
+    endpoint18,
+    addAlquiler,
+    updateAlquiler,
+    deleteAlquiler,
+    getAlquiler
 }
